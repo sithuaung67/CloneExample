@@ -29,6 +29,15 @@
             <li class="header">MAIN NAVIGATION</li>
 
             <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+            <li><a href="{{route('getArtist')}}"><i class="fa fa-user"></i> <span>Artist</span></a></li>
+            <li><a href="{{route('getSong')}}"><i class="fa fa-music"></i> <span>Music</span></a></li>
+            <li><a href="{{route('getAlbum')}}"><i class="fa fa-database"></i> <span>Album</span></a></li>
+            <li><a href="{{route('getCategory')}}"><i class="fa fa-database"></i> <span>Category</span></a></li>
+            <li><a href="{{route('getMusic')}}"><i class="fa fa-music"></i> <span>Music Upload</span></a></li>
+
+
+
+
 
 
 

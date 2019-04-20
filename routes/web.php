@@ -83,6 +83,47 @@ Route::group(['middleware'=>'auth'], function (){
             'as'=>'user.update'
         ]);
 
+        Route::get('/Artist',[
+            'uses'=>'AudioController@getArtist',
+            'as'=>'getArtist'
+        ]);
+        Route::post('/Artist',[
+            'uses'=>'AudioController@postArtist',
+            'as'=>'postArtist'
+        ]);
+        Route::get('/Song',[
+            'uses'=>'AudioController@getSong',
+            'as'=>'getSong'
+        ]);
+        Route::post('/Song',[
+            'uses'=>'AudioController@postSong',
+            'as'=>'postSong'
+        ]);
+        Route::get('/Album',[
+            'uses'=>'AudioController@getAlbum',
+            'as'=>'getAlbum'
+        ]);
+        Route::post('/Album',[
+            'uses'=>'AudioController@postAlbum',
+            'as'=>'postAlbum'
+        ]);
+        Route::get('/Category',[
+            'uses'=>'AudioController@getCategory',
+            'as'=>'getCategory'
+        ]);
+        Route::post('/Category',[
+            'uses'=>'AudioController@postCategory',
+            'as'=>'postCategory'
+        ]);
+        Route::get('/NewMusic',[
+            'uses'=>'AudionController@getNewMusic',
+            'as'=>'getMusic'
+        ]);
+        Route::post('/NewMusic',[
+            'uses'=>'AudioController@postNewMusic',
+            'as'=>'postMusic'
+        ]);
+
     });
 
 
