@@ -8,6 +8,8 @@ use App\Category;
 use App\MusicBag;
 use App\Song;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class AudioController extends Controller
 {
@@ -51,20 +53,20 @@ class AudioController extends Controller
         $cat->save();
         return redirect()->back()->with('info', 'upload category successful.');
     }
-    public function getMusic(){
+    public function getNewMusic(){
         $mus=MusicBag::all();
-        return view('Upload')->with(['mus'=>$mus]);
+        return view('audio')->with(['mus'=>$mus]);
     }
     public function postNewMusic(Request $request){
         $music_name=date("D-M-Y-H-I-s").'.'.$request->file('music_name')->getClientOriginalExtension();
         $music_file=$request->file('music_name');
 
         $mus=new MusicBag();
-        $mus->singer_id=$request['singer_name'];
-        $mus->song_id=$request['song_name'];
-        $mus->album_id=$request['album_name'];
-        $mus->music=$music_name;
-        $mus->category_id=$request['category_id'];
+        $mus->singer_name=$request['artist_name'];
+        $mus->song_name=$request['song_name'];
+        $mus->album_name=$request['album_name'];
+        $mus->category_name=$request['category_name'];
+        $mus->audio=$music_name;
         $mus->Save();
 
         Storage::disk('music')->put($music_name, file::get($music_file));

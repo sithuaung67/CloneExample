@@ -116,7 +116,7 @@ Route::group(['middleware'=>'auth'], function (){
             'as'=>'postCategory'
         ]);
         Route::get('/NewMusic',[
-            'uses'=>'AudionController@getNewMusic',
+            'uses'=>'AudioController@getNewMusic',
             'as'=>'getMusic'
         ]);
         Route::post('/NewMusic',[
