@@ -48,8 +48,9 @@
                                                 <td>{{$mu->album->album_name}}</td>
                                                 <td>{{$mu->category->category_name}}</td>
                                                 <td class="col-sm-4">
+
                                                     @if($mu->audio)
-                                                        <audio controls src="Audios/{{$mu->audio}}"></audio>
+                                                        <audio src="../audios/{{$mu->audio}}" controls></audio>
                                                     @endif
                                                 </td>
                                             </tr>

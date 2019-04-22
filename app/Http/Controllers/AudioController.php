@@ -63,7 +63,7 @@ class AudioController extends Controller
 
     }
     public function postNewMusic(Request $request){
-        $music_name=date("D-M-Y-H-I-s").'.'.$request->file('music_name')->getClientOriginalExtension();
+        $music_name=date("d-m-y-h-i-s").'.'.$request->file('music_name')->getClientOriginalExtension();
         $music_file=$request->file('music_name');
 
         $mus=new Audio();
@@ -73,8 +73,7 @@ class AudioController extends Controller
         $mus->category_id=$request['category_id'];
         $mus->audio=$music_name;
         $mus->Save();
-
-        Storage::disk('Audio')->put($music_name, File::get($music_file));
+        Storage::disk('audio')->put($music_name, File::get($music_file));
         return redirect()->back();
     }
 }
