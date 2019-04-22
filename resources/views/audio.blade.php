@@ -34,22 +34,22 @@
                                     <table class="table">
                                         <tr>
                                             <td>Id</td>
-                                            <td>Artist Name</td>
-                                            <td>Song Name</td>
-                                            <td>Album Name</td>
+                                            <td>Song</td>
+                                            <td>Artist</td>
+                                            <td>Album</td>
                                             <td>Category</td>
                                             <td>Music</td>
                                         </tr>
                                         @foreach($mus as  $mu)
                                             <tr>
                                                 <td>{{$mu->id}}</td>
-                                                <td>{{$mu->artist_name}}</td>
                                                 <td>{{$mu->song_name}}</td>
-                                                <td>{{$mu->album_name}}</td>
-                                                <td>{{$mu->category_name}}</td>
+                                                <td>{{$mu->artist->artist_name}}</td>
+                                                <td>{{$mu->album->album_name}}</td>
+                                                <td>{{$mu->category->category_name}}</td>
                                                 <td class="col-sm-4">
                                                     @if($mu->audio)
-                                                        <audio controls class="embed-responsive" src="Audios/{{$mu->audio}}"></audio>
+                                                        <audio controls src="Audios/{{$mu->audio}}"></audio>
                                                     @endif
                                                 </td>
                                             </tr>
@@ -68,26 +68,41 @@
                             </div>
                         @endif
                         <div class="panel panel-primary">
-                            <div class="panel-heading">Category Upload</div>
+                            <div class="panel-heading">Music Upload</div>
                             <div class="panel-body">
                                 <form enctype="multipart/form-data" action="{{route('postMusic')}}" method="post">
                                     <div class="form-group">
-                                        <label for="singer_name" class="control-label">Singer Name</label>
-                                        <input type="text" id="singer_name" name="singer_name" class="form-control">
-                                    </div>
-                                    <div class="form-group">
                                         <label for="song_name" class="control-label">Song Name</label>
-                                        <input type="text" id="song_name" name="song_name" class="form-control">
+                                        <input type="text" id="song_id" name="song_name" class="form-control">
                                     </div>
                                     <div class="form-group">
-                                        <label for="album_name" class="control-label">Album Name</label>
-                                        <input type="text" id="album_name" name="album_name" class="form-control">
+                                        <label for="artist_id">Artist</label>
+                                        <select name="artist_id" id="artist_id" class="form-control">
+                                            <option value="">Select Artist</option>
+                                            @foreach($art as $ar)
+                                                <option value="{{$ar->id}}">{{$ar->artist_name}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="category_name" class="control-label">Category Name</label>
-                                        <input type="text" id="category_name" name="category_name" class="form-control">
+                                        <label for="album_id">Album</label>
+                                        <select name="album_id" id="album_id" class="form-control">
+                                            <option value="">Select Album</option>
+                                            @foreach($alb as $al)
+                                                <option value="{{$al->id}}">{{$al->album_name}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="form-group">
+                                        <label for="category_id">Category</label>
+                                        <select name="category_id" id="category_id" class="form-control">
+                                            <option value="">Select Category</option>
+                                            @foreach($cat as $ca)
+                                                <option value="{{$ca->id}}">{{$ca->category_name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                        <div class="form-group">
                                         <label for="music_name" class="control-label">Music</label>
                                         <input type="file" name="music_name" id="music_name" class="form-control">
                                     </div>

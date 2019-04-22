@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Album;
 use App\Artist;
+use App\Audio;
 use App\Category;
-use App\MusicBag;
 use App\Song;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -17,6 +17,7 @@ class AudioController extends Controller
         $art=Artist::all();
         return view('artist')->with(['art'=>$art]);
     }
+
     public function postArtist(Request $request){
         $art=new Artist();
         $art->artist_name=$request['artist_name'];
@@ -54,22 +55,26 @@ class AudioController extends Controller
         return redirect()->back()->with('info', 'upload category successful.');
     }
     public function getNewMusic(){
-        $mus=MusicBag::all();
-        return view('audio')->with(['mus'=>$mus]);
+        $mus=Audio::all();
+        $cat=Category::all();
+        $art=Artist::all();
+        $alb=Album::all();
+        return view('audio')->with(['mus'=>$mus])->with(['cat'=>$cat])->with(['art'=>$art])->with(['alb'=>$alb]);
+
     }
     public function postNewMusic(Request $request){
         $music_name=date("D-M-Y-H-I-s").'.'.$request->file('music_name')->getClientOriginalExtension();
         $music_file=$request->file('music_name');
 
-        $mus=new MusicBag();
-        $mus->singer_name=$request['artist_name'];
+        $mus=new Audio();
         $mus->song_name=$request['song_name'];
-        $mus->album_name=$request['album_name'];
-        $mus->category_name=$request['category_name'];
+        $mus->artist_id=$request['artist_id'];
+        $mus->album_id=$request['album_id'];
+        $mus->category_id=$request['category_id'];
         $mus->audio=$music_name;
         $mus->Save();
 
-        Storage::disk('music')->put($music_name, file::get($music_file));
+        Storage::disk('Audio')->put($music_name, File::get($music_file));
         return redirect()->back();
     }
 }
