@@ -123,7 +123,23 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'AudioController@postNewMusic',
             'as'=>'postMusic'
         ]);
+        Route::get('/Artist/edit/{id}',[
+            'uses'=>'AudioController@getEditArtist',
+            'as'=>'getEditArtist'
+        ]);
+        Route::post('/Artist/edit/',[
+            'uses'=>'AudioController@postEditArtist',
+            'as'=>'postEditArtist'
+        ]);
 
+        Route::get('/Artist/edit/{id}',[
+            'uses'=>'AudioController@getEditArtist',
+            'as'=>'getEditArtist'
+        ]);
+        Route::post('/Artist/edit/',[
+            'uses'=>'AudioController@postEditArtist',
+            'as'=>'postEditArtist'
+        ]);
     });
 
 

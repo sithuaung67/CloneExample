@@ -13,6 +13,25 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+    //return $request->user();
+//});
+
+Route::get('/audio',[
+    'uses'=>'ApiController@getAudio'
+]);
+Route::get('/song',[
+    'uses'=>'ApiController@getSong'
+]);
+Route::get('/artist',[
+    'uses'=>'ApiController@getArtist'
+]);
+Route::get('/album',[
+    'uses'=>'ApiController@getAlbum'
+]);
+Route::get('/category',[
+    'uses'=>'ApiController@getCategory'
+]);
+Route::get('/search/{q}',[
+    'uses'=>'ApiController@getSearch'
+]);

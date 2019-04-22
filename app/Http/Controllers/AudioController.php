@@ -76,4 +76,31 @@ class AudioController extends Controller
         Storage::disk('audio')->put($music_name, File::get($music_file));
         return redirect()->back();
     }
+    public function getEditArtist($id){
+        $art=Artist::whereId($id)->FirstOrFail();
+        return view('editArtist')->with(['art'=>$art]);
+    }
+    public function postEditArtist(Request $request){
+        $id=$request['id'];
+        $art=Artist::whereId($id)->FirstOrFail();
+        $art->artist_name=$request['artist_name'];
+        $art->update();
+        return redirect()->route('getArtist')->with('info', 'Edit Album successful');
+    }
+    public function getEditAudio($id){
+        $aud=Audio::whereId($id)->FirstOrFail();
+        $art=Artist::whereId($id)->FirstOrFail();
+        $abl=Album::whereId($id)->FirstOrFail();
+        $cat=Category::whereId($id)->FirstOrFail();
+        $son=Song::whereId($id)->FirstOrFail();
+        return view('editAudio')->with(['aud'=>$aud])->with(['art'=>$art])->with(['abl'=>$abl])->with(['cat'=>$cat])->with(['son'=>$son]);
+    }
+    public function postEditAudio(Request $request){
+        $id=$request['id'];
+        $art=Audio::whereId($id)->FirstOrFail();
+        $art->artist_name=$request['artist_name'];
+        $art->update();
+        return redirect()->route('getArtist')->with('info', 'Edit Album successful');
+    }
 }
+

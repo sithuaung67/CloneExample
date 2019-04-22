@@ -26,30 +26,7 @@
         <section class="content">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-8">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Artist Upload</div>
-                            <div class="panel-body table-responsive">
-                                <form>
-                                    <table class="table">
-                                        <tr>
-                                            <td>Id</td>
-                                            <td>Artist Name</td>
-                                            <td>Action</td>
-                                        </tr>
-                                        @foreach($art as $ar)
-                                            <tr>
-                                                <td>{{$ar->id}}</td>
-                                                <td>{{$ar->artist_name}}</td>
-                                                <td><a href="{{route('getEditArtist',['id'=>$ar->id])}}" class="btn btn-primary btn-sm">Edit</a> </td>
-                                            </tr>
-                                        @endforeach
-                                    </table>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
+                    <div class="col-md-8 col-md-offset-4">
                         @if(Session('info'))
                             <div class="row">
                                 <div class="col-md-6 col-md-offset-3 text-center">
@@ -58,15 +35,16 @@
                             </div>
                         @endif
                         <div class="panel panel-primary">
-                            <div class="panel-heading">Artist Upload</div>
+                            <div class="panel-heading">Edit {{$art->artist_name}}</div>
                             <div class="panel-body">
-                                <form enctype="multipart/form-data" action="{{route('postArtist')}}" method="post">
+                                <form enctype="multipart/form-data" action="{{route('postEditArtist',['id'=>$art->id])}}" method="post">
                                     <div class="form-group">
+                                        <input type="hidden" name="id" value="{{$art->id}}">
                                         <label for="artist_name" class="control-label">Artist Name</label>
-                                        <input type="text" id="artist_name" name="artist_name" class="form-control">
+                                        <input value="{{$art->artist_name}}" type="text" id="artist_name" name="artist_name" class="form-control">
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-sm">Upload</button>
+                                        <button type="submit" class="btn btn-primary btn-sm">Edit</button>
                                     </div>
                                     @csrf
                                 </form>
