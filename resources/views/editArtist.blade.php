@@ -26,7 +26,7 @@
         <section class="content">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-8 col-md-offset-4">
+                    <div class="col-md-6 col-md-offset-3">
                         @if(Session('info'))
                             <div class="row">
                                 <div class="col-md-6 col-md-offset-3 text-center">

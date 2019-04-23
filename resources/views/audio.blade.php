@@ -39,6 +39,7 @@
                                             <td>Album</td>
                                             <td>Category</td>
                                             <td>Music</td>
+                                            <td>Action</td>
                                         </tr>
                                         @foreach($mus as  $mu)
                                             <tr>
@@ -52,6 +53,10 @@
                                                     @if($mu->audio)
                                                         <audio src="../audios/{{$mu->audio}}" controls></audio>
                                                     @endif
+                                                </td>
+                                                <td>
+                                                    <a href="{{route('getEditAudio',['id'=>$mu->id])}}"><i class="fa fa-edit"></i> </a>
+                                                    <a href="{{route('getDeleteAudio',['id'=>$mu->id])}}"><i class="fa fa-trash" style="color: red"></i> </a>
                                                 </td>
                                             </tr>
                                         @endforeach

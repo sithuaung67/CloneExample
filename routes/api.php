@@ -35,3 +35,6 @@ Route::get('/category',[
 Route::get('/search/{q}',[
     'uses'=>'ApiController@getSearch'
 ]);
+Route::get('/audio/{id}',[
+    'uses'=>'ApiController@getPostOne'
+]);

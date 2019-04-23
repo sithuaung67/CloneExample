@@ -132,14 +132,19 @@ Route::group(['middleware'=>'auth'], function (){
             'as'=>'postEditArtist'
         ]);
 
-        Route::get('/Artist/edit/{id}',[
-            'uses'=>'AudioController@getEditArtist',
-            'as'=>'getEditArtist'
+        Route::get('/Audio/edit/{id}',[
+            'uses'=>'AudioController@getEditAudio',
+            'as'=>'getEditAudio'
         ]);
-        Route::post('/Artist/edit/',[
-            'uses'=>'AudioController@postEditArtist',
-            'as'=>'postEditArtist'
+        Route::post('/Audio/edit/',[
+            'uses'=>'AudioController@postEditAudio',
+            'as'=>'postEditAudio'
         ]);
+        Route::get('/Audios/delete',[
+            'uses'=>'AudioController@getDeleteAudio',
+            'as'=>'getDeleteAudio'
+        ]);
+
     });
 
 

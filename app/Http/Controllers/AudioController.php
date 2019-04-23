@@ -89,18 +89,36 @@ class AudioController extends Controller
     }
     public function getEditAudio($id){
         $aud=Audio::whereId($id)->FirstOrFail();
-        $art=Artist::whereId($id)->FirstOrFail();
-        $abl=Album::whereId($id)->FirstOrFail();
-        $cat=Category::whereId($id)->FirstOrFail();
-        $son=Song::whereId($id)->FirstOrFail();
-        return view('editAudio')->with(['aud'=>$aud])->with(['art'=>$art])->with(['abl'=>$abl])->with(['cat'=>$cat])->with(['son'=>$son]);
+        $art=Artist::all();
+        $album=Album::all();
+        $cat=Category::all();
+        $son=Song::all();
+        return view('editAudio')->with(['aud'=>$aud])->with(['art'=>$art])->with(['album'=>$album])->with(['cat'=>$cat])->with(['son'=>$son]);
     }
     public function postEditAudio(Request $request){
         $id=$request['id'];
-        $art=Audio::whereId($id)->FirstOrFail();
-        $art->artist_name=$request['artist_name'];
-        $art->update();
-        return redirect()->route('getArtist')->with('info', 'Edit Album successful');
+        $aud=Audio::whereId($id)->FirstOrFail();
+        $music=$request->file('music_name');
+        if(!empty($music)){
+            Storage::disk('audio')->delete($aud->audio);
+            $music_name=date("d-m-y-h-i-s").'.'.$request->file('music_name')->getClientOriginalExtension();
+            $aud->audio=$music_name;
+            Storage::disk('audio')->put($music_name, File::get($music));
+
+        }
+        $aud->song_name=$request['song_name'];
+        $aud->artist_id=$request['artist_id'];
+        $aud->album_id=$request['album_id'];
+        $aud->category_id=$request['category_id'];
+        $aud->update();
+        return redirect()->route('getMusic')->with('info', 'Edit Album successful');
+    }
+    public function getDeleteAudio(Request $request){
+        $id=$request['id'];
+        $aud=Audio::whereId($id)->FirstOrFail();
+        Storage::disk('audio')->delete($aud->audio);
+        $aud->delete();
+        return redirect()->back()->with(['info'=>'The selected item has been delete']);
     }
 }
 

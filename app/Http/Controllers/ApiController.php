@@ -41,4 +41,12 @@ class ApiController extends Controller
             ->get();
         return response()->json($aud);
     }
+    public function getPostOne($id){
+        $aud=Audio::with('artist')->with('album')->with('category')->whereId($id)->first();
+        if($aud){
+            return response()->json($aud);
+        }else{
+            return response()->json(["message"=>"This item have not found"]);
+        }
+    }
 }
